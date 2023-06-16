@@ -1,0 +1,33 @@
+.profile{
+  padding: 0;
+}
+    .filler{
+      display: flex;
+      justify-content: center;
+    }
+     .filler img{
+      border: 1px solid black;
+      height: 150px;
+    }
+
+    .profile_logo img{
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        border: 2px solid BLUE;
+        cursor: pointer;
+      }
+      .profile_logo img:hover{
+        height: 120px;
+        width: 120px;
+        
+        transition: 300ms;
+      }
+      .status_block{
+        margin-left: 10px;
+        font-style: italic;
+      }
+      .status_input{
+      
+        outline:none;
+      }

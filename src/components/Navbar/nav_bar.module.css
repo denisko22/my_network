@@ -1,0 +1,40 @@
+.nav{
+    grid-area: nav;
+    position: relative;
+    background-color: #b4aee8;
+    width: 100%;
+    box-sizing: border-box;
+    }
+    .nav .nav__item a{
+        position: relative;    
+        display: flex;
+        justify-content: center;
+        color: #800000;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        text-decoration: none;
+        line-height:26pt;
+    }
+
+.nav__settings {
+    position: absolute; /* Sets the position of the container element to absolute */
+    bottom: 50px; /* Aligns the bottom of the container with the bottom of the block */
+    left: 50%; /* Centers the container horizontally within the block */
+    transform: translateX(-50%); /* Adjusts the centering of the container horizontally */
+
+    }
+    .nav__item {
+  
+        color: #800000;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        text-decoration: none;
+        
+    }
+    .friendList{
+        text-align: center;
+    }
+.friends{
+    display: flex;
+    justify-content: center;
+}

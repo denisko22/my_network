@@ -1,0 +1,23 @@
+
+.chat_item a{color: #ccb7b7; text-decoration: none; position: relative;}
+.chat_item::before{
+    position: absolute;
+    display: flex;
+    margin-top: 7px;
+    width: 7px;
+    height: 7px;
+    background-color: lightgray;
+    
+    left: 50px;
+    border-radius: 50%;
+    content: "";
+}
+.chat_item{
+    margin: 10px 0 10px 75px;
+   
+    
+}
+.chat_item a:hover{
+    color: #c5b9b9;
+}
+

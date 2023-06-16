@@ -1,0 +1,8 @@
+.chat{
+    margin: 10px 0 10px 15px;
+    width: 50%; 
+
+}
+.chat_message{
+    font-size: large;
+}

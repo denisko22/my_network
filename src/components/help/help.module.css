@@ -1,0 +1,21 @@
+.Help{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+ margin:0 auto;
+ width: 100%;
+ height: 100%;
+ animation: Help 80ms step-end infinite;
+}
+.Help img{
+    
+    width: 100%;
+    height: 100%;
+    
+}
+@keyframes Help {
+    0%{opacity: 1;}
+    50%{opacity: 0;}
+    100%{opacity: 1;}
+}

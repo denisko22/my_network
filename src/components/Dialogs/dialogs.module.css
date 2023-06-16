@@ -1,0 +1,62 @@
+.dialogs{
+    position: relative;
+    background-color: #f3f0f0;
+    display: flex;
+    color: #d7c2c2;
+    justify-content: space-around;
+}
+.title{
+    font-size: 24px;
+    margin-left: 30px;
+    
+}
+
+.chatlist{
+    position: relative;
+    width: 50%;
+    
+}
+.chatlist:after {
+    content: '';
+    height: 90%;
+    width: 0.5px;
+    
+    
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    background-color: #000000;
+  }
+  .dialogwindow{
+    width: 308px;
+    height: 38px;
+    position: absolute;
+    bottom: 50px;
+    right: 30px;
+  }
+  .dialogwindow textarea{
+    width: 300px;
+    height: 30px;
+        resize: none;
+        outline:none;
+        margin-bottom: 2px;
+  }
+.sendButton{  
+    float:right;
+    margin-top: 10px;
+  width: 100px;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid #d248d2;
+  display: flex;
+  justify-content: center;
+  color: #d248d2;
+  align-items: center;}
+  .sendButton:hover{
+    cursor: pointer;
+    filter:contrast(80%);
+    background: #e3e3e3;
+    transition: 200ms;
+}

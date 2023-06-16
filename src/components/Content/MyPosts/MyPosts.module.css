@@ -1,0 +1,47 @@
+
+    .content__posts{
+        margin-left: 10px;
+        color: #800000;
+        font-family: 'Roboto', sans-serif;
+        
+    }
+  .post_text{
+    margin: 3px 0 10px 10px;
+    background-color: lightgray;
+    min-height: 100px;
+    padding: 10px;
+  }
+    .content__post img{
+        display: block;
+        height: 40px;
+        border-radius: 50%;
+        border: 1.4px solid BLUE;
+        margin-bottom: 10px;
+    }
+    .new_post_form textarea{
+        height: 130px;
+        width: 475px;
+        resize: none;
+        outline:none;
+    }
+    .button_send{
+        margin-top: 10px;
+        width: 100px;
+        height: 30px;
+        background-color: transparent;
+        border: 1px solid #d248d2;
+        display: flex;
+        justify-content: center;
+        color: #d248d2;
+        align-items: center;
+    }
+    .button_send:hover{
+        cursor: pointer;
+        filter:contrast(80%);
+        background: #e3e3e3;
+        transition: 200ms;
+    }
+    .content__posts_new{  
+        margin: 10px 0 10px 10px; 
+    }
+

@@ -1,0 +1,22 @@
+.photo{
+    width: 100px;
+    margin-left: 10px;
+    margin-bottom:10px ;
+}
+.infoBody{
+    margin-left: 10px;
+    border: 1px solid forestgreen;
+    margin: 10px;
+    padding: 10px;
+}
+.location{
+    text-align: right;
+}
+.page{
+ font-size: 16px;
+ cursor: pointer;
+}
+.selectedPage{
+ font-weight: bold;
+ font-size: 18px;
+}

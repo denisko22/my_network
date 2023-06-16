@@ -1,0 +1,7 @@
+textarea:focus, input:focus{
+    outline: none;
+}
+.summary_error{
+    color: rgb(235, 93, 93);
+    font-weight: bold;
+}

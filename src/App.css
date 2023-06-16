@@ -1,0 +1,24 @@
+
+
+.app_wrapper{
+  
+ margin: 0 auto;
+ min-height: 500px;
+ box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-template-areas:
+   'header header header'
+   'nav content content';
+
+  gap: 1px;
+}
+.app_wrap_content_wrapper{
+  position: relative;
+  grid-area: content; 
+  background-color: #e3e3e3;
+  
+}
+
+
