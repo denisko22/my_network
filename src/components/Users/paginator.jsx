@@ -15,11 +15,11 @@ let curPL = curP + 5;
 
 let slicedPages = pages.slice( curPF, curPL);
 
- return <div>
+ return <div >
       
         {
         slicedPages.map(p =>{
-            return <span key={p} className={currentPage === p ? s.page + ' ' + s.selectedPage : s.page} onClick={(e)=>setPageClick(p)} >{p} </span>
+            return  <span key={p} className={currentPage === p ? s.page + ' ' + s.selectedPage : s.page} onClick={(e)=>setPageClick(p)} >{p} </span>
             })}
         </div>
         

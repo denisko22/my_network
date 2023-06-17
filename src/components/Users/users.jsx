@@ -25,13 +25,13 @@ let curPL = curP + 5;
    
    return<div>
         
-       <div>
+       <div className={s.paginator}>
       
-        {
+        <div className= {s.arrow}onClick={()=>curP !== 1 ? props.setPageClick(curP-1) : 0}>&#x2190;</div>{
         slicedPages.map(p =>{
-            return <span key={p} className={props.currentPage === p ? s.page + ' ' + s.selectedPage : s.page} onClick={(e)=>props.setPageClick(p)} >{p} </span>
-            })}
-        </div>
+            return <span key={p} className={props.currentPage === p ? s.page + ' ' + s.selectedPage + ' ' + s.paginator_page : s.page + ' ' + s.paginator_page} onClick={(e)=>props.setPageClick(p)} >{p} </span>
+            })}<div onClick={()=>props.setPageClick(curP+1)} className= {s.arrow}>&#x2192;</div>
+        </div >
         {
         
         props.users.map(u=>
