@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/react-gh-pages/static/css/main.0f0c2bec.css",
+    "main.js": "/react-gh-pages/static/js/main.f90e7f77.js",
+    "static/css/861.67ac6daa.chunk.css": "/react-gh-pages/static/css/861.67ac6daa.chunk.css",
+    "static/js/861.3ff937f3.chunk.js": "/react-gh-pages/static/js/861.3ff937f3.chunk.js",
+    "static/js/819.acd53aaa.chunk.js": "/react-gh-pages/static/js/819.acd53aaa.chunk.js",
+    "static/css/499.c5bac137.chunk.css": "/react-gh-pages/static/css/499.c5bac137.chunk.css",
+    "static/js/499.6308b80a.chunk.js": "/react-gh-pages/static/js/499.6308b80a.chunk.js",
+    "static/media/Bean Eater-1s-200px.svg": "/react-gh-pages/static/media/Bean Eater-1s-200px.67b2533e155f9d390c5e76e7f7cbf638.svg",
+    "index.html": "/react-gh-pages/index.html",
+    "main.0f0c2bec.css.map": "/react-gh-pages/static/css/main.0f0c2bec.css.map",
+    "main.f90e7f77.js.map": "/react-gh-pages/static/js/main.f90e7f77.js.map",
+    "861.67ac6daa.chunk.css.map": "/react-gh-pages/static/css/861.67ac6daa.chunk.css.map",
+    "861.3ff937f3.chunk.js.map": "/react-gh-pages/static/js/861.3ff937f3.chunk.js.map",
+    "819.acd53aaa.chunk.js.map": "/react-gh-pages/static/js/819.acd53aaa.chunk.js.map",
+    "499.c5bac137.chunk.css.map": "/react-gh-pages/static/css/499.c5bac137.chunk.css.map",
+    "499.6308b80a.chunk.js.map": "/react-gh-pages/static/js/499.6308b80a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0f0c2bec.css",
+    "static/js/main.f90e7f77.js"
+  ]
+}
