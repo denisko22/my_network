@@ -11,7 +11,7 @@ let textOfPst= React.createRef();
 
 
 const Posts  = React.memo((props) =>  {
-  console.log('mamamia');
+  
   // let textOnChange = () => {
   //   props.newPostText(textOfPst.current.value);
   //   // props.store.dispatch(newPostTextActionCreator(textOfPst.current.value))

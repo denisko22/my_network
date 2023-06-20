@@ -3,7 +3,8 @@ let ADD_POST = 'myPosts/ADD-POST';
 // let NEW_POST_TEXT = 'NEW-POST-TEXT';
 let SET_CONTENT_ON_CLICK='myPosts/SET_CONTENT_ON_CLICK';
 let SET_STATUS='myPosts/SET_STATUS';
-let DELETE_POST='myPosts/DELETE_POST'
+let DELETE_POST='myPosts/DELETE_POST';
+let SAVE_PHOTO_SUCCESS = 'myPosts/SAVE_PHOTO_SUCCESS'
 
 let initialState = { messageText:[
   { id: 1, text: "Hello, my name is Gustavo" },
@@ -41,6 +42,9 @@ const ProfileReducer =(state = initialState,action)=>{
           case  DELETE_POST:
             return{...state, postId:state.messageText.filter(p=>p!=action.postId)}
 
+          case SAVE_PHOTO_SUCCESS:
+            return{...state, profile :{...state.profile, photos:action.photos} }
+
       default:return state;
   }
     
@@ -52,6 +56,7 @@ const ProfileReducer =(state = initialState,action)=>{
 
     export let setStatus = (status) => ({type: SET_STATUS, status})
     export let deletePost = (postId) => ({type: DELETE_POST, postId})
+    export let savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
    
 
 
@@ -89,4 +94,12 @@ const ProfileReducer =(state = initialState,action)=>{
       }
     }
 
+    export const savePhoto = (photo) =>{
+      return async(dispatch)=>{
+        let data = await profileAPI.savePhoto(photo)
+        if(data.resultCode ===0)  {
+          dispatch(savePhotoSuccess(data.data.photos))
+       }
+      }
+    }
     

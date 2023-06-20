@@ -4,7 +4,7 @@ console.log(style);
 class  ProfileContainer extends React.Component{
   render(){
     return(
-      <Profile {...this.props}/>
+      <Profile isOwner={props.isOwner} {...this.props}/>
   )
 }};
 export default ProfileContainer;

@@ -8,9 +8,9 @@ console.log(style);
 const  Content=(props)=>{
   
     return(<div className={style.content}>
-    <Profile profile = {props.profile} status={props.status} updateStatus={props.updateStatus}/>
+    <Profile savePhoto={props.savePhoto} isOwner={props.isOwner} profile = {props.profile} status={props.status} updateStatus={props.updateStatus}/>
     {/* <Posts newMessageText={props.newMessageText} messageText={props.messageText}  store={props.store}/> */}
-    <PostsContainer profile = {props.profile} updateStatus={props.updateStatus}/>
+    <PostsContainer  profile = {props.profile} updateStatus={props.updateStatus}/>
   </div>)
 };
 export default Content;

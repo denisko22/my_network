@@ -6,7 +6,7 @@ import Content from "./content";
 import { connect } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { compose } from "redux";
-
+import { savePhoto } from "../../redux/profile-reducer";
 export function withRouter(Children){
   
   return(props)=>{
@@ -79,11 +79,11 @@ class  ContentContainer extends React.Component{
     
     return(
       
-      <Content {...this.props} status={this.props.status} updateStatus={this.props.updateStatus}/>
+      <Content {...this.props} isOwner={!this.props.match.params.userId} savePhoto={this.props.savePhoto} status={this.props.status} updateStatus={this.props.updateStatus}/>
     )
   }
 };
-export default compose(connect (mapStateToProps,{setContent, getStatus,updateStatus}),
+export default compose(connect (mapStateToProps,{setContent, getStatus,updateStatus,savePhoto}),
 withAuthRedirect,
 withRouter)
 (ContentContainer);

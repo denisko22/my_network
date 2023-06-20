@@ -31,3 +31,21 @@
       
         outline:none;
       }
+
+      .hidden{
+        display: none;
+
+      }
+      .file_label{
+        cursor:pointer;
+        margin-left: 10px;
+      }
+      .avatar_change{
+        margin-left: 10px;
+        font-size: 10px;
+        
+        width: 80px;
+      }
+      .avatar_change:hover{
+        outline: 1px solid #000;
+      }
