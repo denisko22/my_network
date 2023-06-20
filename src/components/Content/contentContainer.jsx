@@ -29,12 +29,29 @@ let mapStateToProps = (state) => ({
  })
  
 class  ContentContainer extends React.Component{
-  componentDidMount(){
-    
+  refreshProfile(){
     let userId = this.props.match.params.userId;
-    if(!userId)userId = this.props.authorisedId ;
+    if(!userId){
+      userId = this.props.authorisedId
+      if(!userId){
+        this.props.history.push('/login');
+      }
+    }
     this.props.setContent(userId);
     this.props.getStatus(userId)
+  }
+  componentDidMount(){
+    // let userId = this.props.match.params.userId;
+    // if(!userId){
+    //   userId = this.props.authorisedId
+    //   if(!userId){
+    //     this.props.history.push('/login');
+    //   }
+    // } ;
+    // this.props.setContent(userId);
+    // this.props.getStatus(userId)
+    this.refreshProfile()
+    
   //  let userId = this.props.match.params.userId;
   //  if(!userId) userId = 29048;
   //  usersAPI.setContent(userId).then(data=>{
@@ -43,6 +60,21 @@ class  ContentContainer extends React.Component{
    
   // })
   }
+  componentDidUpdate(prevProps,prevState,snapshot){
+    
+    if(this.props.match.params.userId!=prevProps.match.params.userId){
+      this.refreshProfile()
+  //   let userId = this.props.match.params.userId;
+  //   if(!userId){
+  //     userId = this.props.authorisedId
+  //     if(!userId){
+  //       this.props.history.push('/login');
+  //     }
+  // }
+  }
+  // this.props.setContent(userId);
+  // this.props.getStatus(userId)
+}
   render(){
     
     return(
