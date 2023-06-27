@@ -1,4 +1,4 @@
-    import { Field } from "redux-form";
+
     
     export const requiredField = value =>{
         if (value) return undefined
@@ -13,6 +13,3 @@
         return undefined
     }
 
-//     export const createField = (placeholder,name,component,validators) =>{
-//          <Field  placeholder={placeholder} name={name} component={component} validate={validators}/>
-// }

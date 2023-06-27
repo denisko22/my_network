@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { usersAPI, profileAPI } from "../api/api";
 let ADD_POST = 'myPosts/ADD-POST';
 // let NEW_POST_TEXT = 'NEW-POST-TEXT';
@@ -103,3 +104,20 @@ const ProfileReducer =(state = initialState,action)=>{
       }
     }
     
+    export const saveProfile = (profile) =>{
+      return async(dispatch,getState)=>{
+        const userId = getState().auth.userId
+        let data = await profileAPI.saveProfile(profile)
+        
+        
+        if(data.resultCode === 0)  {
+          dispatch(setContent(userId)) 
+      //     dispatch(saveProfileSuccess(data.data.profile))
+       }else{
+        let message = data.messages.length>0 ? data.messages[0] : 'some error'
+         dispatch(stopSubmit('edit-profile',{_error:message}))
+         return Promise.reject(message)
+      }
+
+    }
+  }

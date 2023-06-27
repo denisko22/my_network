@@ -49,3 +49,16 @@
       .avatar_change:hover{
         outline: 1px solid #000;
       }
+      .contacts{
+        padding-left: 20px;
+      }
+      .form_button{
+        border: 1px solid #000;
+        text-align: center;
+        color: aliceblue;
+        font-weight: bold;
+        margin-left: 20px;
+        width: 37px;
+        height: 20px;
+        background: green;
+      }
