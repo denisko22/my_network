@@ -53,14 +53,14 @@ setContent(userId){
 })
 },
 getStatus(userId){
-  return instance.get(`/profile/status/${userId}`).then(response=>{
+  return instance.get(`profile/status/${userId}`).then(response=>{
      
     return response.data
  
 })
 },
 updateStatus(status){
-  return instance.put(`/profile/status`, {status}).then(response=>{
+  return instance.put(`profile/status`, {status}).then(response=>{
      
     return response.data
  
@@ -69,7 +69,7 @@ updateStatus(status){
 savePhoto(photoFile){
   const formData = new FormData()
   formData.append('image',photoFile)
-  return instance.put('/profile/photo',formData,{
+  return instance.put('profile/photo',formData,{
     headers:{
       'Content-Type':'multipart/form-data'
     }
@@ -81,7 +81,7 @@ savePhoto(photoFile){
 },
 saveProfile(profile){
 
-  return instance.put('/profile',profile).then(response=>{
+  return instance.put('profile',profile).then(response=>{
      
     return response.data
  
@@ -90,14 +90,24 @@ saveProfile(profile){
 }
 
 export const authAPI = {
-  login(email,password,rememberMe,isAuth){
-    return instance.post(`/auth/login`, {email,password,rememberMe}).then(response=>{
+  login(email,password,rememberMe,captcha = null){
+    return instance.post(`auth/login`, {email,password,rememberMe,captcha}).then(response=>{
                                     return response.data;  
                           })
 },
 logout(){
-  return instance.delete(`/auth/login`).then(response=>{
+  return instance.delete(`auth/login`).then(response=>{
                                   return response.data;  
                         })
 },
+}
+
+export const securityAPI = {
+  getCaptchaUrl(){
+    return instance.get(`security/get-captcha-url`).then(response=>{
+      return response.data
+    }
+      
+    )
+  }
 }
