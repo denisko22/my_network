@@ -6,8 +6,42 @@ let SET_CONTENT_ON_CLICK='myPosts/SET_CONTENT_ON_CLICK';
 let SET_STATUS='myPosts/SET_STATUS';
 let DELETE_POST='myPosts/DELETE_POST';
 let SAVE_PHOTO_SUCCESS = 'myPosts/SAVE_PHOTO_SUCCESS'
-
-let initialState = { messageText:[
+type MessageTextType = {
+  id:number
+  text:string
+}
+type PostType = {
+  id:number
+  text:string
+} 
+type PhotoType ={
+  small:string|null
+  large:string|null
+}
+type ContactsType={
+  github: string
+  vk: string
+  facebook: string
+  instagram: string
+  twitter: string
+  website: string
+  youtube: string
+  mainLink: string
+}
+type ProfileType = {
+  userId: number
+  lookingForAJob: boolean
+  lookingForAJobDescription: string
+  fullName:string
+  contacts: ContactsType
+  photos:PhotoType
+}
+export type InitialStateType ={
+  messageText:Array<MessageTextType>
+  profile:PostType | null 
+  status:string
+}
+let initialState:InitialStateType = { messageText:[
   { id: 1, text: "Hello, my name is Gustavo" },
   { id: 2, text: "But you can call me Gus" },
   { id: 3, text: "I'm the CEO of Los Pollos Hermanos" },
@@ -17,7 +51,7 @@ profile:null,
 status:''
 
 }
-const ProfileReducer =(state = initialState,action)=>{
+const ProfileReducer =(state = initialState,action:any)=>{
   
   switch (action.type) {
     case ADD_POST:
@@ -50,19 +84,38 @@ const ProfileReducer =(state = initialState,action)=>{
   }
     
     }
-    export let addPostActionCreator = (newMessageText) => ({type: ADD_POST,newMessageText:newMessageText})
+    type AddPostActionCreatorType={
+      type:typeof ADD_POST
+      newMessageText:string|null
+    }
+    export let addPostActionCreator = (newMessageText:string|null):AddPostActionCreatorType => ({type: ADD_POST,newMessageText:newMessageText})
 // export let newPostTextActionCreator = (text) =>({type:NEW_POST_TEXT, newText:text})
     export default ProfileReducer
-    export let setContentOnClick = (content) => ({type: SET_CONTENT_ON_CLICK, content})
-
-    export let setStatus = (status) => ({type: SET_STATUS, status})
-    export let deletePost = (postId) => ({type: DELETE_POST, postId})
-    export let savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
+    type SetContentOnClickType={
+      type:typeof SET_CONTENT_ON_CLICK
+      content:ProfileType
+    }
+    export let setContentOnClick = (content:ProfileType):SetContentOnClickType => ({type: SET_CONTENT_ON_CLICK, content})
+    type SetStatusType={
+      type:typeof SET_STATUS
+      status:string|null
+    }
+    export let setStatus = (status:string|null):SetStatusType => ({type: SET_STATUS, status})
+    type DeletePostType={
+      type:typeof DELETE_POST
+      postId:number
+    }
+    export let deletePost = (postId:number) => ({type: DELETE_POST, postId})
+    type SavePhotoSuccessType={
+      type:typeof SAVE_PHOTO_SUCCESS
+      photos:PhotoType
+    }
+    export let savePhotoSuccess = (photos:PhotoType):SavePhotoSuccessType => ({type: SAVE_PHOTO_SUCCESS, photos})
    
 
 
-    export const setContent= (uId)=>{
-      return  async (dispatch)=>{
+    export const setContent= (uId:number)=>{
+      return  async (dispatch:any)=>{
         let userId = uId;
   //  if(!userId)userId = 29048 ;
       // if(!initialState.status) initialState.status = 'loler'
@@ -73,8 +126,8 @@ const ProfileReducer =(state = initialState,action)=>{
   
       }
     }
-    export const getStatus= (uId)=>{
-      return async (dispatch)=>{
+    export const getStatus= (uId:number)=>{
+      return async (dispatch:any)=>{
         let userId = uId;
     let data = await profileAPI.getStatus(userId)
        
@@ -83,8 +136,8 @@ const ProfileReducer =(state = initialState,action)=>{
  
       }
     }
-    export const updateStatus= (status)=>{
-      return async (dispatch)=>{
+    export const updateStatus= (status:string)=>{
+      return async (dispatch:any)=>{
         
    
     let data = await profileAPI.updateStatus(status)
@@ -95,8 +148,8 @@ const ProfileReducer =(state = initialState,action)=>{
       }
     }
 
-    export const savePhoto = (photo) =>{
-      return async(dispatch)=>{
+    export const savePhoto = (photo:string) =>{
+      return async(dispatch:any)=>{
         let data = await profileAPI.savePhoto(photo)
         if(data.resultCode ===0)  {
           dispatch(savePhotoSuccess(data.data.photos))
@@ -104,8 +157,8 @@ const ProfileReducer =(state = initialState,action)=>{
       }
     }
     
-    export const saveProfile = (profile) =>{
-      return async(dispatch,getState)=>{
+    export const saveProfile = (profile:ProfileType) =>{
+      return async(dispatch:any,getState:any)=>{
         const userId = getState().auth.userId
         let data = await profileAPI.saveProfile(profile)
         

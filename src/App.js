@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import {  Route, Routes } from "react-router-dom";
+import {  Navigate, Route, Routes } from "react-router-dom";
 import './App.css';
 import  { withRouter } from "./components/Content/contentContainer";
 import Help from "./components/help/help";
@@ -8,7 +8,7 @@ import Nav from './components/Navbar/nav_bar';
 import News from "./components/News/news";
 import Settings from "./components/Settings/settings";
 // import DialogsContainer from "./components/Dialogs/dialogsContainer";
-// import UsersContainer from "./components/Users/usersContainer";
+// import UsersContainer from "./components/Users/usersContainer";    
 // import Login from "./components/login/login";
 import HeaderContainer from "./components/Header/headerContainer";
 import { connect } from "react-redux";
@@ -26,9 +26,15 @@ const Login =  lazy(()=> import("./components/login/login"));
 const DialogsContainer =  lazy(()=> import('./components/Dialogs/dialogsContainer'));
 
 class App extends React.Component {
+  catchAllUnhandledErrors= (reason,promise) =>{
+alert("some error");
+  }
   componentDidMount(){
     this.props.initialize()
-
+    window.addEventListener('unhandledrejection',this.catchAllUnhandledErrors)
+   }
+   componentWillUnmount(){
+    window.removeEventListener('unhandledrejection',this.catchAllUnhandledErrors)
    }
 render(){
   if(!this.props.initialized){
@@ -44,6 +50,7 @@ render(){
       
       <Suspense fallback={<div><Preloader /></div>}>
         <Routes>
+        <Route exact path="/" element={<Navigate to={'/Profile'}/>} />
         <Route path="/Dialogs/*" element={<DialogsContainer/>} />
           <Route path="/Profile/:userId?" element={<ContentContainer />} />
           <Route path="/News/*" element={<News />} />
@@ -52,8 +59,8 @@ render(){
           <Route path="/Help/*" element={<Help />} />
           <Route path="/Users/*" element={<UsersContainer />} />
           <Route path="/Login/*" element={<Login />} />
-
-
+          <Route path="/*" element={<div>404 NOT FOUND</div>} />
+          
         </Routes>
         </Suspense>
       </div>

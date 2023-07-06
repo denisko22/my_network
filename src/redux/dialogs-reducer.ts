@@ -1,5 +1,16 @@
+
+
+
 let NEW_MESSAGE_DATA_TEXT ='NEW-MESSAGE-DATA-TEXT';
 let ADD_MESSAGE = 'dialogs/ADD-MESSAGE';
+type DialogType = {
+  id: number
+  name:string
+}
+type MessageType = {
+  id: number
+  message:string
+}
 let initialState = {
   usersData:[
     {id:1, name:'Denis'},
@@ -12,7 +23,7 @@ let initialState = {
     {id:8, name:'Roman'},
     {id:9, name:'Sasha'}
 
-      ],
+      ] as Array<DialogType>,
   messagesData:[    
   {id:1, message:'Hi!'},
   {id:2, message:'Yo'},
@@ -23,9 +34,10 @@ let initialState = {
   {id:7, message:'damn...'},
   {id:8, message:'i know'}
 
-],
+] as Array<MessageType>,
 }
-let DialogsReducer =(state = initialState,action)=>{
+export type InitialStateType = typeof initialState
+let DialogsReducer =(state = initialState,action:any)=>{
  
    switch (action.type) {
     case ADD_MESSAGE:
@@ -43,6 +55,9 @@ let DialogsReducer =(state = initialState,action)=>{
       }
     
     }
-    
-    export let addMessageActionCreator =(newMessageDataText)=>({type: ADD_MESSAGE, newMessageDataText:newMessageDataText})
+    type AddMessageActionCreatorType = {
+      type: typeof ADD_MESSAGE
+      newMessageDataText:string | null
+    }
+    export let addMessageActionCreator =(newMessageDataText:string | null):AddMessageActionCreatorType=>({type: ADD_MESSAGE, newMessageDataText:newMessageDataText})
     export default DialogsReducer;
