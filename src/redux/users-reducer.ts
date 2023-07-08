@@ -1,5 +1,6 @@
 import { usersAPI} from '../api/api'
 import { UpdateObjectInArray } from '../utils/objectHelpers';
+import { PhotoType } from './profile-reducer';
 let FOLLOW = 'usersPage/FOLLOW';
 let UNFOLLOW = 'usersPage/UNFOLLOW';
 let SET_USERS = 'usersPage/SET_USERS';
@@ -7,10 +8,12 @@ let SET_PAGE = 'usersPage/SET_PAGE';
 let SET_USERS_COUNT = 'usersPage/SET_USERS_COUNT';
 let SET_IS_FETCHING = 'usersPage/SET_IS_FETCHING';
 let SET_FOLLOW_PROGRESS = 'usersPage/SET_FOLLOW_PROGRESS';
-type UserType = {
+ export type UserType = {
     id:number
     name:string
     status:string|null
+    photos:PhotoType
+    followed:boolean
 }
 
 let initialState = {

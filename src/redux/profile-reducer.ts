@@ -14,7 +14,7 @@ type PostType = {
   id:number
   text:string
 } 
-type PhotoType ={
+export type PhotoType ={
   small:string|null
   large:string|null
 }

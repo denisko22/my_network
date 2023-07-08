@@ -2,6 +2,7 @@
 import { NavLink } from "react-router-dom";
 import s from "./users.module.css"
 import React from "react";
+import { UserType } from "../../redux/users-reducer";
 
 
 {/* <span className={s.page + ' ' + s.selectedPage}>1 </span>
@@ -9,7 +10,20 @@ import React from "react";
        <span className={s.page}>3 </span>
        <span className={s.page}>4 </span>
        <span className={s.page}>5 </span> */}
-   let Users = (props) =>{
+
+       type Props = {
+        totalUsersCount:number
+        pageSize:number
+        currentPage:number
+        setPageClick: (curP:number) => void
+        followInProgress:Array<number>
+        users:Array<UserType>
+        unfollow:(id:number) =>void
+        follow:(id:number)=> void
+        
+    }
+   let Users:React.FC<Props> = (props) =>{
+    
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for(let i = 1; i <= pagesCount; i++){
@@ -23,7 +37,7 @@ let curPL = curP + 5;
 
     let slicedPages = pages.slice( curPF, curPL);
    
-   return<div>
+     return<div>
         
        <div className={s.paginator}>
       

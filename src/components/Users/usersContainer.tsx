@@ -1,14 +1,32 @@
 import React from 'react';
 import withAuthRedirect from '../hoc/withAuthRedirect';
-
+import {AppStateType} from '../../redux/redux-store'
 import { connect } from "react-redux";
 import Users from "./users";
-import {  getUsers,followSuccess,unfollowSuccess } from "../../redux/users-reducer";
+import {  getUsers,followSuccess,unfollowSuccess, UserType } from "../../redux/users-reducer";
 import Preloader from '../common/preloader/preloader';
 import { compose } from 'redux';
 import { getCurrentPage, getFollowInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsersSuperSelector, selectorGetUsers } from '../../redux/users-selector';
 
-class UsersAPIComponent extends React.Component  {
+type MapStatePropsTypes = {
+  pageSize:number
+  currentPage:number
+  isFetching:boolean
+  totalUsersCount:number
+  users:Array<UserType>
+  followInProgress:Array<number>
+}
+type MapDispatchPropsTypes = {
+  getUsers:(pageSize:number,currentPage:number)=>void
+  followSuccess:(id:number) =>void
+  unfollowSuccess:(id:number)=> void
+}
+type OwnPropsType={
+  pageTitle:string
+}
+type PropsType =MapStatePropsTypes & MapDispatchPropsTypes & OwnPropsType
+
+class UsersAPIComponent extends React.Component<PropsType>  {
   
   componentDidMount(){
     const {pageSize,currentPage}= this.props
@@ -21,8 +39,8 @@ class UsersAPIComponent extends React.Component  {
   //  }
   //  )
     }; 
-  setPageClick = (pageNum) =>{
-    const pageSize = this.props
+  setPageClick = (pageNum:number) =>{
+    const {pageSize} = this.props
     this.props.getUsers(pageSize,pageNum);
     // this.props.setIsFetching(true);
     //   this.props.changePageOnClick(pageNum)
@@ -41,6 +59,7 @@ class UsersAPIComponent extends React.Component  {
   render (){
        
       return<>
+      <h2>{this.props.pageTitle}</h2>
       {this.props.isFetching ? <Preloader/> : null}
       <Users 
        totalUsersCount={this.props.totalUsersCount}
@@ -58,7 +77,7 @@ class UsersAPIComponent extends React.Component  {
   }
 }
 
-  let mapStateToProps = (state) =>{
+  let mapStateToProps = (state:AppStateType):MapStatePropsTypes =>{
     console.log('hi');
       return{
           // users:  selectorGetUsers(state),
@@ -70,7 +89,7 @@ class UsersAPIComponent extends React.Component  {
           followInProgress: getFollowInProgress(state),
       }
     }
-   export default compose(connect(mapStateToProps,{
+   export default compose<MapStatePropsTypes,MapDispatchPropsTypes,OwnPropsType,AppStateType>(connect(mapStateToProps,{
     
     getUsers,
     followSuccess,

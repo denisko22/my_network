@@ -57,7 +57,7 @@ render(){
           <Route path="/Music/*" element={<Music />} />
           <Route path="/Settings/*" element={<Settings />} />
           <Route path="/Help/*" element={<Help />} />
-          <Route path="/Users/*" element={<UsersContainer />} />
+          <Route path="/Users/*" element={<UsersContainer pageTitle='denis' />} />
           <Route path="/Login/*" element={<Login />} />
           <Route path="/*" element={<div>404 NOT FOUND</div>} />
           
