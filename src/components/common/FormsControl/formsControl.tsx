@@ -1,8 +1,17 @@
 import React from "react"
 import s from "./formsControl.module.css"
-import { Field } from "redux-form";
-
-const FormControl = ({input, meta,child, ...props}) =>{
+import { Field, WrappedFieldMetaProps, WrappedFieldProps } from "redux-form"
+import { FieldValidatorsType } from "../../../utils/validators/validators"
+import { LoginFormValuesTypeKeys } from "../../login/login"
+type FormControlParamType={
+    meta:WrappedFieldMetaProps
+    
+    children:React.ReactNode
+    input:any
+}
+type FormControlType =(params:FormControlParamType)=>React.ReactNode
+const FormControl:FormControlType = ({input, meta, ...props}) =>{
+//const FormControl:FormControlType = ({input, meta,child, ...props}) =>{
     const hasError = meta.touched && meta.error;
     return(
         <div >
@@ -31,15 +40,17 @@ const FormControl = ({input, meta,child, ...props}) =>{
 //         </div>
 //     )
 // }
-export const Textarea = (props) => {
-    const {input, meta,child, ...restProps} = props;
+export const Textarea:React.FC<WrappedFieldProps> = (props) => {
+    //const {input, meta,child, ...restProps} = props;
+    const {input, meta, ...restProps} = props;
    
     return <FormControl {...props}><textarea {...input} {...restProps}  ></textarea></FormControl>
            
 }
-export const Input = (props) => {
+export const Input:React.FC<WrappedFieldProps> = (props) => {
     
-    const {input, meta,child, ...restProps} = props;
+    //const {input, meta,child, ...restProps} = props;
+    const {input, meta, ...restProps} = props;
     return(
         
         <FormControl {...props}> <input {...input} {...restProps}  /></FormControl>
@@ -47,7 +58,7 @@ export const Input = (props) => {
     )
 }
 
-export const createField = (placeholder,name,component,validators, props = {},text = '') =>{
+export function createField<FormKeysType extends string>  (placeholder:string | undefined,name:FormKeysType,component:React.Component,validators:Array<FieldValidatorsType>, props = {},text = '') {
     return<div>
     <Field  placeholder={placeholder} name={name} component={component} validate={validators} 
     {...props}/> {text} 

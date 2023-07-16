@@ -89,7 +89,7 @@ class UsersAPIComponent extends React.Component<PropsType>  {
           followInProgress: getFollowInProgress(state),
       }
     }
-   export default compose<MapStatePropsTypes,MapDispatchPropsTypes,OwnPropsType,AppStateType>(connect(mapStateToProps,{
+   export default compose(connect<MapStatePropsTypes,MapDispatchPropsTypes,OwnPropsType,AppStateType>(mapStateToProps,{
     
     getUsers,
     followSuccess,

@@ -1,6 +1,10 @@
+import { Dispatch } from 'redux';
 import { usersAPI} from '../api/api'
-import { UpdateObjectInArray } from '../utils/objectHelpers';
+import { updateObjectInArray } from '../utils/objectHelpers';
 import { PhotoType } from './profile-reducer';
+import { ThunkAction } from 'redux-thunk';
+import { AppStateType } from './redux-store';
+import { Action } from '@remix-run/router';
 let FOLLOW = 'usersPage/FOLLOW';
 let UNFOLLOW = 'usersPage/UNFOLLOW';
 let SET_USERS = 'usersPage/SET_USERS';
@@ -11,9 +15,9 @@ let SET_FOLLOW_PROGRESS = 'usersPage/SET_FOLLOW_PROGRESS';
  export type UserType = {
     id:number
     name:string
-    status:string|null
     photos:PhotoType
-    followed:boolean
+    status:string|null
+    followed:boolean 
 }
 
 let initialState = {
@@ -22,7 +26,8 @@ let initialState = {
     pageSize: 5 as number,
     currentPage: 1 as number,
     isFetching:false as boolean,
-    followInProgress:[] as Array<number>
+    followInProgress:[] as Array<number>,
+    
     
     
 };
@@ -32,12 +37,12 @@ type InitialStateType = typeof initialState
 //     {id:2, imgUrl:'https://static.vecteezy.com/system/resources/previews/007/576/295/non_2x/stop-killing-time-vector.jpg', fullName:'Anna',location:{country:'Ukraine',city:'kyiv'},followed:false, status:'netflix and chill?;)'},
 //     {id:3, imgUrl:'https://static.vecteezy.com/system/resources/previews/007/576/295/non_2x/stop-killing-time-vector.jpg', fullName:'Slavik',location:{country:'Germany',city:'mannheim'},followed:true, status:'i need 5 mil total of rockets!'},
 //     {id:4, imgUrl:'https://static.vecteezy.com/system/resources/previews/007/576/295/non_2x/stop-killing-time-vector.jpg', fullName:'Nazir',location:{country:'Ukraine',city:'Lviv'},followed:true, status:'mashallah'}]
-export const UsersReducer = (state=initialState, action:any) => {
+export const UsersReducer = (state=initialState, action:ActionsTypes):InitialStateType => {
     
     switch (action.type) {
         case FOLLOW:    
             return{...state,
-                users:UpdateObjectInArray(state.users,action.userId,'id',{followed : true})
+                users:updateObjectInArray(state.users, action.userId,'id',{followed : true})
             };
     
             //     users:state.users.map(u  => {if(u.id === action.userId){
@@ -46,7 +51,7 @@ export const UsersReducer = (state=initialState, action:any) => {
             
         case UNFOLLOW:
             
-        return{...state,users:UpdateObjectInArray(state.users,action.userId,'id',{followed : false})}
+        return{...state,users:updateObjectInArray(state.users,action.userId,'id',{followed : false})}
             //  {...state,
             //     users:state.users.map(u  => {if(u.id === action.userId){
             //          return{...u, followed : false}
@@ -77,13 +82,18 @@ export const UsersReducer = (state=initialState, action:any) => {
                 default: return state
 
         
-        
+                
     }
+    
 }
+type ActionsTypes = FollowOnClickType |UnFollowOnClickType |SetUsersOnClickType |ChangePageOnClickType |SetUsersCountType |
+SetIsFetchingType |SetFollowProgressType
+
 type FollowOnClickType = {
     type:typeof FOLLOW
     userId:number
 }
+
 export const followOnClick =(userId:number):FollowOnClickType=>({type:FOLLOW, userId})
 type UnFollowOnClickType = {
     type:typeof UNFOLLOW
@@ -93,6 +103,7 @@ type UnFollowOnClickType = {
     type SetUsersOnClickType = {
         type:typeof SET_USERS
         users:Array<UserType>
+        
     }
     export const setUsersOnClick =(users:Array<UserType>):SetUsersOnClickType=>({type:SET_USERS,users})
     type ChangePageOnClickType = {
@@ -117,9 +128,12 @@ type UnFollowOnClickType = {
     }
     export const setFollowProgress =(isFollowing:boolean,userId:number):SetFollowProgressType=>({type:SET_FOLLOW_PROGRESS,isFollowing,userId})
 
-    export const getUsers = (pageSize:number,currentPage:number) =>{
-        return   async (dispatch:any) => {
+    type GetStateType = () => ActionsTypes
+    type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+    export const getUsers = (pageSize:number,currentPage:number):ThunkType =>{
+        return   async (dispatch:Dispatch<ActionsTypes>, getState) => {
             dispatch (setIsFetching(true))
+            
             let data = await usersAPI.getUsers(pageSize,currentPage)
                 
                 dispatch (changePageOnClick(currentPage))
@@ -130,7 +144,7 @@ type UnFollowOnClickType = {
         }
     }
 
-    const followUnfollowSuccessFlow = async (dispatch:any,userId:number,apiMethod:any,actionCreator:any) =>{
+    const followUnfollowSuccessFlow = async (dispatch:any,userId:number,apiMethod:any,actionCreator:(userId:number)=> Action) =>{
         dispatch( setFollowProgress(true,userId))
         let data = await apiMethod(userId)
             if(data.resultCode===0){
@@ -139,7 +153,7 @@ type UnFollowOnClickType = {
           }
           dispatch( setFollowProgress(false,userId))
     }
-    export const followSuccess = (userId:number) =>{
+    export const followSuccess = (userId:number):ThunkType =>{
         return  async (dispatch:any) => {
             let apiMethod = usersAPI.followUser.bind(usersAPI)
             let actionCreator = followOnClick
